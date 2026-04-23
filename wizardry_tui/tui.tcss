@@ -1,0 +1,78 @@
+Screen {
+    background: #050507;
+}
+
+#body {
+    height: 1fr;
+}
+
+#main-col {
+    width: 3fr;
+    height: 1fr;
+}
+
+#side {
+    width: 42;
+    height: 1fr;
+    border-left: solid #332;
+}
+
+#view-wire, #view-castle {
+    height: 1fr;
+    border: solid #554;
+    background: #000;
+    padding: 1 2;
+    color: #dca;
+}
+
+#flash-bar {
+    height: 1;
+    background: #141008;
+    color: #eec;
+    padding: 0 1;
+}
+
+#log {
+    height: 10;
+    border: solid #443;
+    background: #05050a;
+}
+
+PartyPanel, PositionPanel, HintsPanel, RosterPanel {
+    height: auto;
+    border: solid #443;
+    padding: 0 1;
+    background: #0e0e0f;
+}
+
+PartyPanel { border-title-color: #ed8; }
+PositionPanel { border-title-color: #ed8; }
+HintsPanel { border-title-color: #ed8; }
+RosterPanel { border-title-color: #ed8; }
+
+/* Modal screens */
+TitleScreen, HelpScreen, CharCreateScreen, PartyAssembleScreen,
+TrainingGroundsScreen, InnScreen, TempleScreen, ShopScreen,
+CombatScreen, GameOverScreen, VictoryScreen, PartyStatusScreen {
+    align: center middle;
+}
+
+TitleScreen > Vertical, HelpScreen > Vertical, CharCreateScreen > Vertical,
+PartyAssembleScreen > Vertical, TrainingGroundsScreen > Vertical,
+InnScreen > Vertical, TempleScreen > Vertical, ShopScreen > Vertical,
+GameOverScreen > Vertical, VictoryScreen > Vertical,
+PartyStatusScreen > Vertical {
+    width: 96;
+    height: 34;
+    border: double #cc8;
+    background: #111;
+    padding: 1 2;
+}
+
+CombatScreen > Vertical {
+    width: 120;
+    height: 40;
+    border: double #c86;
+    background: #0a0a10;
+    padding: 1 2;
+}
