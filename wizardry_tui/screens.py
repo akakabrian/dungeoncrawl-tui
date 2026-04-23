@@ -303,7 +303,7 @@ class PartyAssembleScreen(ModalScreen):
         Binding("escape", "close", "Back"),
         Binding("up", "prev", show=False, priority=True),
         Binding("down", "next", show=False, priority=True),
-        Binding("space", "toggle", "Toggle", priority=True),
+        Binding("space", "toggle_member", "Toggle", priority=True),
         Binding("enter", "confirm", "Done", priority=True),
         Binding("j", "next", show=False),
         Binding("k", "prev", show=False),
@@ -363,7 +363,7 @@ class PartyAssembleScreen(ModalScreen):
             self._sel = (self._sel + 1) % len(self.app.sim.roster)   # type: ignore[attr-defined]
             self._refresh()
 
-    def action_toggle(self) -> None:
+    def action_toggle_member(self) -> None:
         if self._sel in self._chosen:
             self._chosen.remove(self._sel)
         elif len(self._chosen) < 6:
@@ -635,9 +635,9 @@ class PartyStatusScreen(ModalScreen):
 
     def compose(self) -> ComposeResult:
         with Vertical():
-            yield Static(self._render(), id="ps-out")
+            yield Static(self._render_status(), id="ps-out")
 
-    def _render(self) -> Text:
+    def _render_status(self) -> Text:
         sim = self.app.sim   # type: ignore[attr-defined]
         t = Text()
         t.append("[bold yellow]Party Status[/]\n\n", style="")
@@ -934,20 +934,17 @@ class CombatScreen(ModalScreen):
         """Resolve the round (only if all actions queued)."""
         if self._phase != "select" or self._current_slot < 6:
             return
-        # Clear log buffer and run.
+        # Snapshot log length, run the round, then append only newly-added
+        # lines to the on-screen round log.
         before = len(self.combat.log)
         self.combat.resolve_round(self._actions)
-        for line in self.combat.log[before:]:
-            self._round_log.append(line)
+        self._round_log.extend(self.combat.log[before:])
         outcome = self.combat.is_over()
         if outcome is not None:
+            mid = len(self.combat.log)
             result = self.combat.finish()
-            for line in self.combat.log[before:]:
-                # already appended; skip duplicates
-                pass
-            # Append any post-finish lines.
-            for line in self.combat.log[len(self._round_log):]:
-                self._round_log.append(line)
+            # Append any post-finish lines (victory / loss / xp / gold).
+            self._round_log.extend(self.combat.log[mid:])
             self.app.refresh_panels()   # type: ignore[attr-defined]
             self._refresh()
             if self.on_done:

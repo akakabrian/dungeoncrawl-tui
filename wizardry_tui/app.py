@@ -220,17 +220,19 @@ class WizApp(App):
         Binding("4", "castle_go(4)", show=False),
         Binding("5", "castle_go(5)", show=False),
         Binding("6", "castle_go(6)", show=False),
-        # Dungeon movement — arrows and wasd.
-        Binding("up", "dungeon_forward", show=False, priority=True),
-        Binding("w", "dungeon_forward", show=False, priority=True),
-        Binding("down", "dungeon_back", show=False, priority=True),
-        Binding("s", "dungeon_back", show=False, priority=True),
-        Binding("left", "dungeon_turn_left", show=False, priority=True),
-        Binding("a", "dungeon_turn_left", show=False, priority=True),
-        Binding("right", "dungeon_turn_right", show=False, priority=True),
-        Binding("d", "dungeon_turn_right", show=False, priority=True),
-        Binding("space", "interact", show=False, priority=True),
-        Binding("enter", "interact", show=False, priority=True),
+        # Dungeon movement — arrows and wasd.  Not priority: ModalScreen
+        # subclasses (Combat, Shop, etc.) rebind many of these letters
+        # (s=spell, r=run, d=delete) and must win when they're on top.
+        Binding("up", "dungeon_forward", show=False),
+        Binding("w", "dungeon_forward", show=False),
+        Binding("down", "dungeon_back", show=False),
+        Binding("s", "dungeon_back", show=False),
+        Binding("left", "dungeon_turn_left", show=False),
+        Binding("a", "dungeon_turn_left", show=False),
+        Binding("right", "dungeon_turn_right", show=False),
+        Binding("d", "dungeon_turn_right", show=False),
+        Binding("space", "interact", show=False),
+        Binding("enter", "interact", show=False),
         Binding("m", "party_menu", show=False),
         Binding("escape", "dungeon_exit", show=False),
     ]
@@ -378,8 +380,17 @@ class WizApp(App):
 
     # --- dungeon actions ---------------------------------------------
 
+    def _modal_open(self) -> bool:
+        """True when a ModalScreen is on top — app-level priority bindings
+        should yield so the modal's own bindings run."""
+        from textual.screen import ModalScreen
+        try:
+            return isinstance(self.screen, ModalScreen)
+        except Exception:
+            return False
+
     def action_dungeon_forward(self) -> None:
-        if not self.sim.in_dungeon:
+        if self._modal_open() or not self.sim.in_dungeon:
             return
         moved, msg, event = self.sim.step_forward()
         self.refresh_panels()
@@ -389,7 +400,7 @@ class WizApp(App):
         self._handle_dungeon_event(event)
 
     def action_dungeon_back(self) -> None:
-        if not self.sim.in_dungeon:
+        if self._modal_open() or not self.sim.in_dungeon:
             return
         moved, msg = self.sim.step_back()
         if not moved:
@@ -397,19 +408,19 @@ class WizApp(App):
         self.refresh_panels()
 
     def action_dungeon_turn_left(self) -> None:
-        if not self.sim.in_dungeon:
+        if self._modal_open() or not self.sim.in_dungeon:
             return
         self.sim.turn_left()
         self.refresh_panels()
 
     def action_dungeon_turn_right(self) -> None:
-        if not self.sim.in_dungeon:
+        if self._modal_open() or not self.sim.in_dungeon:
             return
         self.sim.turn_right()
         self.refresh_panels()
 
     def action_interact(self) -> None:
-        if not self.sim.in_dungeon:
+        if self._modal_open() or not self.sim.in_dungeon:
             return
         feat = self.sim.current_feature()
         if feat == T.FEAT_STAIRS_DOWN:
@@ -434,11 +445,15 @@ class WizApp(App):
             self._start_boss_fight()
 
     def action_party_menu(self) -> None:
+        if self._modal_open():
+            return
         if any(i >= 0 for i in self.sim.party_slots):
             self.push_screen(SC.PartyStatusScreen())
 
     def action_dungeon_exit(self) -> None:
         """Escape from dungeon mode (debug convenience)."""
+        if self._modal_open():
+            return
         if self.sim.in_dungeon:
             # Escape returns to castle via ASCEND-equivalent (simplified).
             self.sim.leave_dungeon()
