@@ -1,4 +1,7 @@
 # dungeoncrawl-tui
+
+> Inspired by Wizardry (1981, Sir-Tech). Trademarks belong to their respective owners. Unaffiliated fan project.
+
 Only the prepared return to daylight.
 
 ![Hero](screenshots/hero.svg)
