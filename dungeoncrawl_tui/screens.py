@@ -32,7 +32,7 @@ class TitleScreen(ModalScreen):
     def compose(self) -> ComposeResult:
         with Vertical():
             yield Static(Text.from_markup(
-                "\n[bold yellow]wizardry-tui[/]\n\n"
+                "\n[bold yellow]dungeoncrawl-tui[/]\n\n"
                 "[dim]The Mad Overlord's Deep[/]\n\n"
                 "A king's daughter is taken.  The deep beneath the Keep breathes.\n"
                 "Gather six brave souls and descend.\n\n"
@@ -60,7 +60,7 @@ class HelpScreen(ModalScreen):
 
     def compose(self) -> ComposeResult:
         body = Text.from_markup(
-            "[bold yellow]wizardry-tui — help[/]\n\n"
+            "[bold yellow]dungeoncrawl-tui — help[/]\n\n"
             "[bold]Castle:[/]\n"
             "  [bold]1[/] Training Grounds — create or review characters\n"
             "  [bold]2[/] Tavern — form an active party of up to 6\n"

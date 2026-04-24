@@ -1,24 +1,25 @@
-# wizardry-tui
+# dungeoncrawl-tui
+Only the prepared return to daylight.
 
-Terminal-native clean-room reinterpretation of the 1981 Sir-Tech
-dungeon crawler **Wizardry: Proving Grounds of the Mad Overlord**.
-Six-character party, 8 classes, Mage + Priest spell schools, and the
-game's signature ASCII-wireframe first-person dungeon view.
+![Hero](screenshots/hero.svg)
+![Gameplay](screenshots/gameplay.svg)
 
-**Clean-room.** No Sir-Tech assets, no decompiled data. All strings,
-names, monster tables, and level layouts are original prose inspired
-by public mechanical documentation. See `DECISIONS.md`.
+## About
+Ten levels deep beneath the castle, Andrew the Unmade waits. Roll a six-adventurer party — fighters, priests, mages, thieves, bishops, maybe a samurai if the dice are kind — and descend. Permadeath is final. Ash is not resurrection. The map fills one step at a time. Touch nothing. Trust no chest. Bring torches. The Mad Overlord's Deep does not forgive.
 
-## Quick start
+## Screenshots
+![Hero](screenshots/hero.svg)
+![Gameplay](screenshots/gameplay.svg)
 
-```
-make venv     # set up .venv, install textual, install package
-make run      # play
-make qa       # run headless QA harness
+## Install & Run
+```bash
+git clone https://github.com/akakabrian/dungeoncrawl-tui
+cd dungeoncrawl-tui
+make
+make run
 ```
 
 ## Controls
-
 **Castle (default home):**
 
 - `1` Training Grounds (create/review characters)
@@ -38,14 +39,16 @@ make qa       # run headless QA harness
 - `M` party status
 - `escape` retreat to castle
 
-## Scope
-
-Vertical slice of the original 10-floor dungeon — 3 floors (B1/B2/B3).
-Enough to demonstrate doors, stairs, chutes, spinners, teleports, pits,
-and a scripted boss encounter.
+## Testing
+```bash
+make test       # QA harness
+make playtest   # scripted critical-path run
+make perf       # performance baseline
+```
 
 ## License
+MIT
 
-MIT.  The original Wizardry series is owned by Drinian (formerly
-Sir-Tech, then 1259190 Ontario Inc., then Aeria).  This project is not
-affiliated with any of them.
+## Built with
+- [Textual](https://textual.textualize.io/) — the TUI framework
+- [tui-game-build](https://github.com/akakabrian/tui-foundry) — shared build process

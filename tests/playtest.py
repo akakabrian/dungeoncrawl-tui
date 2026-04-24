@@ -13,10 +13,10 @@ import sys
 import traceback
 from pathlib import Path
 
-from wizardry_tui import data as D
-from wizardry_tui import sim as S
-from wizardry_tui import tiles as T
-from wizardry_tui.app import WizApp
+from dungeoncrawl_tui import data as D
+from dungeoncrawl_tui import sim as S
+from dungeoncrawl_tui import tiles as T
+from dungeoncrawl_tui.app import WizApp
 
 
 OUT = Path(__file__).resolve().parent / "out"
@@ -147,7 +147,7 @@ async def _run(pilot) -> None:
                 await pilot.press("space")
                 await pilot.pause()
 
-    from wizardry_tui import screens as SC
+    from dungeoncrawl_tui import screens as SC
     groups = [
         S.MonsterGroup("kobold", [
             S.MonsterInstance("kobold", 4, 4),

@@ -7,11 +7,11 @@ from __future__ import annotations
 import random
 import time
 
-from wizardry_tui import data as D
-from wizardry_tui import maps as M
-from wizardry_tui import render3d as R3
-from wizardry_tui import sim as S
-from wizardry_tui import tiles as T
+from dungeoncrawl_tui import data as D
+from dungeoncrawl_tui import maps as M
+from dungeoncrawl_tui import render3d as R3
+from dungeoncrawl_tui import sim as S
+from dungeoncrawl_tui import tiles as T
 
 
 def _bench(label: str, fn, iters: int = 1000) -> None:
@@ -84,7 +84,7 @@ def bench_combat_round() -> None:
 
 
 def main() -> None:
-    print("wizardry-tui perf baseline")
+    print("dungeoncrawl-tui perf baseline")
     bench_build_floor()
     bench_wireframe_render()
     bench_minimap()

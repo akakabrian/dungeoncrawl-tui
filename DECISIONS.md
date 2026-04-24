@@ -1,4 +1,4 @@
-# wizardry-tui — design decisions
+# dungeoncrawl-tui — design decisions
 
 ## 0. Licensing — clean-room, Sir-Tech / Drinian IP
 
@@ -256,7 +256,7 @@ view.
 
 ## 11. Save / load
 
-- JSON save at `~/.wizardry_tui_save.json`. Single slot in v1.
+- JSON save at `~/.dungeoncrawl_tui_save.json`. Single slot in v1.
 - Snapshots: roster (all characters), active party, inventory, gold,
   current map/floor/position/facing, story flags, RNG state.
 
@@ -334,13 +334,13 @@ Following skill convention (priority=True on movement):
 ## 15. Directory layout
 
 ```
-wizardry-tui/
+dungeoncrawl-tui/
 ├── wiz.py                        # argparse entry point
 ├── pyproject.toml
 ├── Makefile
 ├── DECISIONS.md                  # this file
 ├── README.md
-└── wizardry_tui/
+└── dungeoncrawl_tui/
     ├── __init__.py
     ├── sim.py                    # character, party, dungeon, combat
     ├── data.py                   # classes, spells, monsters, items

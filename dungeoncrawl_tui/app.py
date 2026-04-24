@@ -1,4 +1,4 @@
-"""Textual app shell — wizardry-tui.
+"""Textual app shell — dungeoncrawl-tui.
 
 Two modes, one app:
 
@@ -23,7 +23,7 @@ from . import sim as S
 from . import tiles as T
 
 
-SAVE_PATH = Path.home() / ".wizardry_tui_save.json"
+SAVE_PATH = Path.home() / ".dungeoncrawl_tui_save.json"
 
 
 # ---- Wireframe view ----------------------------------------------------
@@ -202,7 +202,7 @@ def _bar(cur: int, mx: int, width: int = 8) -> Text:
 
 class WizApp(App):
     CSS_PATH = "tui.tcss"
-    TITLE = "wizardry-tui"
+    TITLE = "dungeoncrawl-tui"
     SUB_TITLE = "The Mad Overlord's Deep"
 
     MSG_NEW_GAME = "new_game"

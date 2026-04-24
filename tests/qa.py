@@ -1,4 +1,4 @@
-"""Headless QA harness — Pilot-driven scenarios for wizardry-tui.
+"""Headless QA harness — Pilot-driven scenarios for dungeoncrawl-tui.
 
     python -m tests.qa             # all scenarios
     python -m tests.qa combat      # filter by substring
@@ -13,11 +13,11 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Awaitable, Callable
 
-from wizardry_tui import data as D
-from wizardry_tui import render3d as R3
-from wizardry_tui import sim as S
-from wizardry_tui import tiles as T
-from wizardry_tui.app import WizApp
+from dungeoncrawl_tui import data as D
+from dungeoncrawl_tui import render3d as R3
+from dungeoncrawl_tui import sim as S
+from dungeoncrawl_tui import tiles as T
+from dungeoncrawl_tui.app import WizApp
 
 
 OUT = Path(__file__).resolve().parent / "out"

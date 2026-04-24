@@ -1,5 +1,5 @@
 [project]
-name = "wizardry-tui"
+name = "dungeoncrawl-tui"
 version = "0.1.0"
 description = "Terminal-native grid-based first-person dungeon crawler, clean-room from public design docs"
 requires-python = ">=3.10"
@@ -12,7 +12,7 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
-packages = ["wizardry_tui"]
+packages = ["dungeoncrawl_tui"]
 
 [tool.setuptools.package-data]
-wizardry_tui = ["tui.tcss"]
+dungeoncrawl_tui = ["tui.tcss"]

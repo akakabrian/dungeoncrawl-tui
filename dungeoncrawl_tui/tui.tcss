@@ -7,12 +7,14 @@ Screen {
 }
 
 #main-col {
-    width: 3fr;
+    width: 4fr;
     height: 1fr;
 }
 
 #side {
-    width: 42;
+    width: 1fr;
+    min-width: 24;
+    max-width: 36;
     height: 1fr;
     border-left: solid #332;
 }
